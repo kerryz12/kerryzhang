@@ -14,6 +14,16 @@ const Navbar: React.FC = () => {
         setScrolled(false);
       }
 
+      // Update active section to skills if at bottom of page
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollPosition = window.scrollY;
+
+      if (scrollPosition + windowHeight >= documentHeight - 50) {
+        setActiveSection("skills");
+        return;
+      }
+
       // Update active section based on scroll position
       const sections = ["home", "about", "projects", "skills", "contact"];
 
