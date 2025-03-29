@@ -57,6 +57,14 @@ const Navbar: React.FC = () => {
               {item}
             </a>
           ))}
+          <a
+            href="/Kerry_Zhang_Resume.pdf"
+            className="font-medium hover:text-blue-500 transition-colors text-gray-800"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Resume
+          </a>
         </div>
         <div className="md:hidden">
           <button className="text-gray-800">

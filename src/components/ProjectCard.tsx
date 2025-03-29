@@ -16,7 +16,7 @@ const ProjectCard: React.FC<ProjectProps> = ({
   link,
 }) => {
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1 group">
+    <div className="bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 group">
       <div className="h-56 overflow-hidden">
         <a
           href={link}

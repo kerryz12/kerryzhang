@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import ReactCountryFlag from "react-country-flag";
 
 const HeroSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -120,7 +121,7 @@ const HeroSection: React.FC = () => {
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
           Hello, I'm <span className="text-blue-500">Kerry Zhang</span>
         </h1>
-        <h2 className="text-2xl md:text-3xl text-gray-700 mb-16">
+        <h2 className="text-2xl md:text-3xl text-gray-700 mb-16 flex items-center gap-5">
           Software Developer
         </h2>
 

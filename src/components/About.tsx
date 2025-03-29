@@ -1,14 +1,17 @@
-// About Section Component
 import React from "react";
+import about from "../assets/about.jpg";
 
 const AboutSection: React.FC = () => {
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-        <div className="bg-gray-100 h-96 rounded-lg overflow-hidden shadow-lg">
-          {/* Profile Image Placeholder */}
-          <div className="h-full w-full bg-gradient-to-br from-blue-200 to-indigo-200 flex items-center justify-center">
-            <span className="text-gray-400 text-xl"></span>
+        <div className="bg-gray-100 h-96 rounded-xl overflow-hidden shadow-lg">
+          <div className="h-full w-full bg-gradient-to-br from-blue-200 to-indigo-200 flex items-center justify-center relative">
+            <img
+              src={about}
+              alt="A photo I took at night."
+              className="absolute h-[calc(100%-2rem)] w-[calc(100%-2rem)] object-cover rounded-xl"
+            />
           </div>
         </div>
         <div>
@@ -43,7 +46,7 @@ const AboutSection: React.FC = () => {
               View Projects
             </a>
             <a
-              href="/resume.pdf"
+              href="/Kerry_Zhang_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="border border-blue-500 text-blue-500 py-2 px-4 rounded-md hover:bg-blue-50 transition-colors"
