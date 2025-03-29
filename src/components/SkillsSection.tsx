@@ -55,7 +55,7 @@ const SkillsSection: React.FC = () => {
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg shadow-md transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1 group">
+          <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl shadow-md transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1 group">
             <BackgroundLights color="bg-blue-200" />
             <div className="relative z-10">
               <h3 className="text-xl font-bold mb-4 text-center">Languages</h3>
@@ -70,7 +70,7 @@ const SkillsSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg shadow-md transition-all duration-500 ease-out hover:shadow-lg hover:-translate-y-1 group">
+          <div className="relative bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl shadow-md transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1 group">
             <BackgroundLights color="bg-purple-200" />
             <div className="relative z-10">
               <h3 className="text-xl font-bold mb-4 text-center">Frameworks</h3>
@@ -85,7 +85,7 @@ const SkillsSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative bg-gradient-to-br from-green-50 to-teal-50 p-6 rounded-lg shadow-md transition-all duration-500 ease-out hover:shadow-lg hover:-translate-y-1 group">
+          <div className="relative bg-gradient-to-br from-green-50 to-teal-50 p-6 rounded-xl shadow-md transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1 group">
             <BackgroundLights color="bg-green-200" />
             <div className="relative z-10">
               <h3 className="text-xl font-bold mb-4 text-center">
