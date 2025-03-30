@@ -10,12 +10,12 @@ const SkillsSection: React.FC = () => {
     "SQL",
   ];
   const frameworks = [
-    "Node.js",
+    "Node",
     "Express",
     "React",
-    "Vue.js",
+    "Vue",
+    "Next",
     "Tailwind CSS",
-    "Next.js",
   ];
   const toolsSkills = [
     "Git",
