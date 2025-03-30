@@ -10,7 +10,7 @@ const ProjectsSection: React.FC = () => {
     {
       title: "Guess the Word",
       description:
-        "A full-stack webapp where users attempt to guess a mystery word by asking yes or no questions.",
+        "A full-stack web application where users attempt to guess a mystery word by asking an AI yes or no questions.",
       image: guesstheword,
       alt: "Guess the Word",
       tech: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL"],
@@ -37,7 +37,7 @@ const ProjectsSection: React.FC = () => {
     {
       title: "DB Forum",
       description:
-        "A web forum allowing student from various schools to share posts and comments with one another during COVID lockdown.",
+        "A web forum allowing students from various schools to share posts and comments with one another during COVID lockdown.",
       image: dbforum,
       alt: "dbforum",
       tech: ["Next.js", "Java", "Spring Boot", "MongoDB"],
