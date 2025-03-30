@@ -13,7 +13,7 @@ const ProjectsSection: React.FC = () => {
         "A full-stack web application where users attempt to guess a mystery word by asking an AI yes or no questions.",
       image: guesstheword,
       alt: "Guess the Word",
-      tech: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL"],
+      tech: ["React", "TypeScript", "Node", "Express", "PostgreSQL"],
       link: "https://guesstheworddaily.onrender.com/",
     },
     {
@@ -22,7 +22,7 @@ const ProjectsSection: React.FC = () => {
         "A social media app allowing users to share a song they enjoy with others, once every day.",
       image: songoftheday,
       alt: "Song of the Day",
-      tech: ["React", "TypeScript", "Node.js", "Express", "PsotgreSQL"],
+      tech: ["React", "TypeScript", "Node", "Express", "PostgreSQL"],
       link: "https://songoftheday.app",
     },
     {
@@ -31,7 +31,7 @@ const ProjectsSection: React.FC = () => {
         "A wrist-wearable device for monitoring patient vital signs and transmitting them to a web dashboard.",
       image: healthmonitor,
       alt: "healthmonitor",
-      tech: ["Vue", "JavaScript", "Python", "Flask"],
+      tech: ["Vue", "Python", "Flask"],
       link: "https://github.com/kerryz12/capstone2023_JY92",
     },
     {
@@ -40,7 +40,7 @@ const ProjectsSection: React.FC = () => {
         "A web forum allowing students from various schools to share posts and comments with one another during COVID lockdown.",
       image: dbforum,
       alt: "dbforum",
-      tech: ["Next.js", "Java", "Spring Boot", "MongoDB"],
+      tech: ["Next", "Java", "Spring Boot", "MongoDB"],
       link: "https://github.com/kerryz12/nwHacks-2022",
     },
     {
