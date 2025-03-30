@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import ReactCountryFlag from "react-country-flag";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const HeroSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -20,7 +20,6 @@ const HeroSection: React.FC = () => {
     setCanvasDimensions();
     window.addEventListener("resize", setCanvasDimensions);
 
-    // Create particles
     const particleCount = 100;
     const particles: Particle[] = [];
 
@@ -45,7 +44,6 @@ const HeroSection: React.FC = () => {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        // Boundary checks
         if (this.x > canvas!.width) this.x = 0;
         else if (this.x < 0) this.x = canvas!.width;
 
@@ -84,18 +82,15 @@ const HeroSection: React.FC = () => {
       particles.push(new Particle());
     }
 
-    // Animation
     const animate = () => {
       if (!canvas || !ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update and draw particles
       for (const particle of particles) {
         particle.update();
         particle.draw();
       }
 
-      // Connect particles
       for (const particle of particles) {
         particle.connect(particles);
       }
@@ -121,15 +116,34 @@ const HeroSection: React.FC = () => {
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
           Hello, I'm <span className="text-blue-500">Kerry Zhang</span>
         </h1>
-        <h2 className="text-2xl md:text-3xl text-gray-700 mb-16 flex items-center gap-5">
+        <h2 className="text-2xl md:text-3xl text-gray-700 mb-12 flex items-center gap-5">
           Software Developer
         </h2>
 
-        <div className="relative w-64 h-64">
+        <div className="relative w-64 h-64 mb-12">
           <canvas
             ref={canvasRef}
             className="absolute inset-0 w-full h-full rounded-full cursor-pointer"
           />
+        </div>
+
+        <div className="flex gap-6">
+          <a
+            href="https://www.linkedin.com/in/your-linkedin-username"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-700 hover:text-blue-500 transition-colors"
+          >
+            <FaLinkedin size={40} />
+          </a>
+          <a
+            href="https://github.com/your-github-username"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-700 hover:text-blue-500 transition-colors"
+          >
+            <FaGithub size={40} />
+          </a>
         </div>
       </div>
     </section>
