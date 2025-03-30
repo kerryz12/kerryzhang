@@ -129,7 +129,7 @@ const HeroSection: React.FC = () => {
 
         <div className="flex gap-6">
           <a
-            href="https://www.linkedin.com/in/your-linkedin-username"
+            href="https://www.linkedin.com/in/kerry-zhang-ee"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-700 hover:text-blue-500 transition-colors"
@@ -137,7 +137,7 @@ const HeroSection: React.FC = () => {
             <FaLinkedin size={40} />
           </a>
           <a
-            href="https://github.com/your-github-username"
+            href="https://github.com/kerryz12"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-700 hover:text-blue-500 transition-colors"
