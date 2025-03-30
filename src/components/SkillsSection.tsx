@@ -47,7 +47,7 @@ const SkillsSection: React.FC = () => {
     <section id="skills" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-bold mb-4 text-center">
-          Skills and Tools
+          My Skills
         </h2>
         <p className="text-gray-600 mb-12 text-center max-w-3xl mx-auto">
           I've worked with a wide range of technologies in the software
