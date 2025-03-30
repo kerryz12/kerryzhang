@@ -73,7 +73,7 @@ const SkillsSection: React.FC = () => {
           <div className="relative bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl shadow-md transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1 group">
             <BackgroundLights color="bg-purple-200" />
             <div className="relative z-10">
-              <h3 className="text-xl font-bold mb-4 text-center">Frameworks</h3>
+              <h3 className="text-xl font-bold mb-4 text-center">Libraries & Frameworks</h3>
               <ul className="space-y-3">
                 {frameworks.map((skill, index) => (
                   <li key={index} className="flex items-center">
