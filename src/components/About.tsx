@@ -2,9 +2,37 @@ import React from "react";
 import about from "../assets/about.jpg";
 
 const AboutSection: React.FC = () => {
+  const BackgroundLights: React.FC<{ color: string }> = ({ color }) => (
+    <div className="absolute inset-0 z-0 overflow-hidden">
+      {[...Array(3)].map((_, i) => {
+        const size = 600;
+        const top = Math.random() * 80;
+        const left = Math.random() * 80;
+        const duration = 6 + Math.random() * 4;
+        const delay = Math.random() * 3;
+
+        return (
+          <div
+            key={i}
+            className={`absolute rounded-full opacity-30 ${color} blur-3xl animate-float`}
+            style={{
+              width: `${size}px`,
+              height: `${size}px`,
+              top: `${top}%`,
+              left: `${left}%`,
+              animationDuration: `${duration}s`,
+              animationDelay: `${delay}s`,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+
   return (
-    <section id="about" className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+    <section id="about" className="py-20 bg-white relative">
+      <BackgroundLights color="bg-blue-200" />
+      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
         <div className="bg-gray-100 h-96 rounded-xl overflow-hidden shadow-md transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1 group">
           <div className="h-full w-full bg-gradient-to-br from-blue-200 to-indigo-200 flex items-center justify-center relative">
             <img
@@ -23,7 +51,7 @@ const AboutSection: React.FC = () => {
             languages like C and C++, I've gone on to build all different kinds
             of software, including web applications!
           </p>
-          <p className="test-gray-700 mb-6">
+          <p className="text-gray-700 mb-6">
             I work with a wide variety of languages and technologies ranging
             from TypeScript to Python to React. I always focus on writing
             functional, robust, and maintainable code.
