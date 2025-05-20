@@ -7,6 +7,7 @@ import {
   BarChart,
   Globe,
 } from "lucide-react";
+import BackgroundLights from "./BackgroundLights";
 
 const SkillsSection: React.FC = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -31,7 +32,7 @@ const SkillsSection: React.FC = () => {
     {
       title: "Tools & Others",
       icon: <Terminal size={24} />,
-      color: "green",
+      color: "lightBlue",
       skills: ["Git", "RESTful APIs", "Travis CI", "Agile", "Linux", "MATLAB"],
       description:
         "Additional skills and technologies that round out my technical toolkit.",
@@ -45,7 +46,7 @@ const SkillsSection: React.FC = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-white">
+    <section id="skills" className="py-20 bg-white relative">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-bold mb-4 text-center">My Skills</h2>
         <p className="text-gray-600 mb-12 text-center max-w-3xl mx-auto">
@@ -75,14 +76,14 @@ const SkillsSection: React.FC = () => {
                 highlight: "border-purple-400",
                 dot: "bg-purple-700",
               },
-              green: {
-                border: "border-green-200",
-                bg: "bg-green-50",
-                text: "text-green-700",
-                iconBg: "bg-green-100",
-                iconText: "text-green-700",
-                highlight: "border-green-400",
-                dot: "bg-green-700",
+              lightBlue: {
+                border: "border-sky-200",
+                bg: "bg-sky-50",
+                text: "text-sky-700",
+                iconBg: "bg-sky-100",
+                iconText: "text-sky-700",
+                highlight: "border-sky-400",
+                dot: "bg-sky-700",
               },
             };
 
