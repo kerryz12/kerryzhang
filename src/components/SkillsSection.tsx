@@ -61,9 +61,9 @@ const SkillsSection: React.FC = () => {
               blue: {
                 border: "border-blue-200",
                 bg: "bg-blue-50",
-                text: "text-blue-700",
+                text: "text-blue-500",
                 iconBg: "bg-blue-100",
-                iconText: "text-blue-700",
+                iconText: "text-blue-500",
                 highlight: "border-blue-400",
                 dot: "bg-blue-700",
               },
