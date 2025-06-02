@@ -39,12 +39,6 @@ const SkillsSection: React.FC = () => {
     },
   ];
 
-  const additionalSkills = [
-    { title: "Embedded Software", icon: <BarChart size={20} /> },
-    { title: "Web Development", icon: <Globe size={20} /> },
-    { title: "Database Design", icon: <Database size={20} /> },
-  ];
-
   return (
     <section id="skills" className="py-20 bg-white relative">
       <div className="max-w-6xl mx-auto px-4">
@@ -139,18 +133,6 @@ const SkillsSection: React.FC = () => {
               </div>
             );
           })}
-        </div>
-
-        <div className="flex flex-wrap justify-center gap-4">
-          {additionalSkills.map((skill, idx) => (
-            <div
-              key={idx}
-              className="px-4 py-2 bg-gray-50 rounded-full flex items-center border border-gray-200 shadow-sm"
-            >
-              <span className="mr-2 text-gray-700">{skill.icon}</span>
-              <span className="font-medium">{skill.title}</span>
-            </div>
-          ))}
         </div>
       </div>
     </section>

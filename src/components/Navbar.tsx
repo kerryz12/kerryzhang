@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-// Navbar Component
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -25,7 +24,7 @@ const Navbar: React.FC = () => {
       }
 
       // Update active section based on scroll position
-      const sections = ["home", "about", "projects", "skills", "contact"];
+      const sections = ["home", "about", "projects", "skills"];
 
       for (const section of sections) {
         const element = document.getElementById(section);
