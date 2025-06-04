@@ -59,31 +59,39 @@ const Footer = () => {
             <div>
               <h4 className="font-semibold mb-3 text-gray-200">Quick Links</h4>
               <div className="space-y-2">
-                <a
-                  href="#about"
-                  className="block text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  About
-                </a>
-                <a
-                  href="#projects"
-                  className="block text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  Projects
-                </a>
-                <a
-                  href="#skills"
-                  className="block text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  Skills
-                </a>
-                <a
-                  href="/Kerry_Zhang_Resume.pdf"
-                  target="_blank"
-                  className="block text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  Resume
-                </a>
+                <div>
+                  <a
+                    href="#about"
+                    className="inline-block text-gray-400 hover:text-white transition-colors duration-200"
+                  >
+                    About
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="#projects"
+                    className="inline-block text-gray-400 hover:text-white transition-colors duration-200"
+                  >
+                    Projects
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="#skills"
+                    className="inline-block text-gray-400 hover:text-white transition-colors duration-200"
+                  >
+                    Skills
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="/Kerry_Zhang_Resume.pdf"
+                    target="_blank"
+                    className="inline-block text-gray-400 hover:text-white transition-colors duration-200"
+                  >
+                    Resume
+                  </a>
+                </div>
               </div>
             </div>
           </div>
