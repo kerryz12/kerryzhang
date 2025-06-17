@@ -8,7 +8,7 @@ import {
 
 const Footer = () => {
   const currentSpotifyEmbed =
-    "https://open.spotify.com/embed/track/003vvx7Niy0yvhvHt4a68B?utm_source=generator";
+    "https://open.spotify.com/embed/track/6K4t31amVTZDgR3sKmwUJJ?utm_source=generator";
   const currentQuote = "What you seek is seeking you.";
 
   return (
