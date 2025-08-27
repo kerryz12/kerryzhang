@@ -17,13 +17,13 @@ const BackgroundLights = () => {
     const newLights: Light[] = [];
     const colours = ["bg-blue-200", "bg-purple-200"];
 
-    for (let i = 0; i < 6; i++) {
-      const size = 500 + Math.random() * 200;
+    for (let i = 0; i < 8; i++) {
+      const size = 800 + Math.random() * 400;
       const top = Math.random() * 80;
       const left = Math.random() * 80;
-      const duration = 6 + Math.random() * 4;
-      const delay = Math.random() * 3;
-      const color = colours[Math.floor(i / 3)];
+      const duration = 7 + Math.random() * 5;
+      const delay = Math.random() * 4;
+      const color = colours[Math.floor(i % 2)];
 
       newLights.push({
         id: i,
@@ -44,7 +44,7 @@ const BackgroundLights = () => {
       {lights.map((light) => (
         <div
           key={light.id}
-          className={`absolute rounded-full opacity-20 ${light.color} blur-3xl animate-pulse`}
+          className={`absolute rounded-full opacity-30 ${light.color} blur-3xl animate-pulse`}
           style={{
             width: `${light.size}px`,
             height: `${light.size}px`,

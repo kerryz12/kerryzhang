@@ -6,14 +6,10 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Change navbar style on scroll
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      // Set scrolled state based on scroll position
+      setScrolled(window.scrollY > 50);
 
-      // Update active section to skills if at bottom of page
+      const sections = ["home", "about", "projects", "skills"];
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const scrollPosition = window.scrollY;
@@ -23,15 +19,12 @@ const Navbar: React.FC = () => {
         return;
       }
 
-      // Update active section based on scroll position
-      const sections = ["home", "about", "projects", "skills"];
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
         if (element) {
           const rect = element.getBoundingClientRect();
           if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
+            setActiveSection(sectionId);
             break;
           }
         }
@@ -44,55 +37,63 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed w-full py-4 px-6 transition-all duration-300 z-50 ${
-        scrolled ? "bg-white shadow-md" : "bg-transparent"
+      className={`fixed w-full top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "p-2" : "p-0"
       }`}
     >
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
-        <a href="#home" className="text-2xl font-bold">
-          Kerry Zhang
-        </a>
-        <div className="hidden md:flex space-x-8">
-          {["Home", "About", "Projects", "Skills"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className={`font-medium hover:text-blue-500 transition-colors ${
-                activeSection === item.toLowerCase()
-                  ? "text-blue-500"
-                  : "text-gray-800"
-              }`}
-            >
-              {item}
-            </a>
-          ))}
-          <a
-            href="/Kerry_Zhang_Resume.pdf"
-            className="font-medium hover:text-blue-500 transition-colors text-gray-800"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Resume
+      <div
+        className={`max-w-6xl mx-auto transition-all duration-300 ${
+          scrolled
+            ? "bg-white/90 backdrop-blur-sm rounded-3xl shadow-lg"
+            : "bg-transparent rounded-none shadow-none"
+        }`}
+      >
+        <div className="flex justify-between items-center px-6 py-3">
+          <a href="#home" className="text-2xl font-bold text-gray-800">
+            Kerry Zhang
           </a>
-        </div>
-        <div className="md:hidden">
-          <button className="text-gray-800">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          <div className="hidden md:flex items-center space-x-8">
+            {["Home", "About", "Projects", "Skills"].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className={`font-medium hover:text-blue-500 transition-colors ${
+                  activeSection === item.toLowerCase()
+                    ? "text-blue-500"
+                    : "text-gray-800"
+                }`}
+              >
+                {item}
+              </a>
+            ))}
+            <a
+              href="/Kerry_Zhang_Resume.pdf"
+              className="font-medium hover:text-blue-500 transition-colors text-gray-800"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          </button>
+              Resume
+            </a>
+          </div>
+          <div className="md:hidden">
+            <button className="text-gray-800">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </nav>

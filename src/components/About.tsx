@@ -1,11 +1,9 @@
 import React from "react";
 import about from "../assets/about.jpg";
-import BackgroundLights from "./BackgroundLights";
 
 const AboutSection: React.FC = () => {
   return (
     <section id="about" className="py-20 bg-white relative">
-      <BackgroundLights />
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
         <div className="bg-gray-100 h-96 rounded-xl overflow-hidden shadow-md transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1 group">
           <div className="h-full w-full bg-gradient-to-br from-blue-200 to-indigo-200 flex items-center justify-center relative">

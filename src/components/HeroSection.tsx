@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
+import BackgroundLights from "./BackgroundLights";
 
 const HeroSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,6 @@ const HeroSection: React.FC = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set canvas dimensions
     const setCanvasDimensions = () => {
       canvas.width = canvas.clientWidth;
       canvas.height = canvas.clientHeight;
@@ -20,7 +20,7 @@ const HeroSection: React.FC = () => {
     setCanvasDimensions();
     window.addEventListener("resize", setCanvasDimensions);
 
-    const particleCount = 100;
+    const particleCount = 50;
     const particles: Particle[] = [];
 
     class Particle {
@@ -37,7 +37,7 @@ const HeroSection: React.FC = () => {
         this.size = Math.random() * 5 + 1;
         this.speedX = (Math.random() - 0.5) * 1;
         this.speedY = (Math.random() - 0.5) * 1;
-        this.color = `rgba(25, 118, 210, ${Math.random() * 0.5 + 0.2})`;
+        this.color = `rgba(0, 0, 0, ${Math.random() * 0.3 + 0.1})`;
       }
 
       update() {
@@ -59,15 +59,15 @@ const HeroSection: React.FC = () => {
         ctx.fill();
       }
 
-      connect(particles: Particle[]) {
+      connect(particlesToConnect: Particle[]) {
         if (!ctx) return;
-        for (const particle of particles) {
+        for (const particle of particlesToConnect) {
           const distance = Math.sqrt(
             (this.x - particle.x) ** 2 + (this.y - particle.y) ** 2
           );
 
-          if (distance < 100) {
-            ctx.strokeStyle = `rgba(25, 118, 210, ${0.2 - distance / 500})`;
+          if (distance < 200) {
+            ctx.strokeStyle = `rgba(0, 0, 0, ${0.2 - distance / 1000})`;
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(this.x, this.y);
@@ -108,11 +108,16 @@ const HeroSection: React.FC = () => {
   return (
     <section
       id="home"
-      className="h-screen flex items-center justify-center relative overflow-hidden"
+      className="h-screen flex items-center justify-center relative overflow-hidden bg-white"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-indigo-100 z-0"></div>
+      <BackgroundLights />
 
-      <div className="text-center z-10 px-4 flex flex-col items-center">
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full z-[1]"
+      />
+
+      <div className="text-center relative z-10 px-4 flex flex-col items-center">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
           Hello, I'm{" "}
           <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -122,13 +127,6 @@ const HeroSection: React.FC = () => {
         <h2 className="text-2xl md:text-3xl text-gray-700 mb-12 flex items-center gap-5">
           Software Developer
         </h2>
-
-        <div className="relative w-64 h-64 mb-12">
-          <canvas
-            ref={canvasRef}
-            className="absolute inset-0 w-full h-full rounded-full cursor-pointer"
-          />
-        </div>
 
         <div className="flex gap-6">
           <a
