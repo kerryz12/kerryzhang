@@ -58,11 +58,11 @@ const HeroSection: React.FC = () => {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        if (this.x > canvas!.clientWidth) this.x = 0;
-        else if (this.x < 0) this.x = canvas!.clientWidth;
+        if (this.x > canvas!.clientWidth + this.size) this.x = -this.size;
+        else if (this.x < -this.size) this.x = canvas!.clientWidth + this.size;
 
-        if (this.y > canvas!.clientHeight) this.y = 0;
-        else if (this.y < 0) this.y = canvas!.clientHeight;
+        if (this.y > canvas!.clientHeight + this.size) this.y = -this.size;
+        else if (this.y < -this.size) this.y = canvas!.clientHeight + this.size;
       }
 
       draw() {
