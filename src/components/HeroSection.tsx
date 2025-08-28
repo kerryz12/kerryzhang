@@ -13,6 +13,8 @@ const HeroSection: React.FC = () => {
     if (!ctx) return;
 
     let particles: Particle[] = [];
+    let canvasWidth = 0;
+    let canvasHeight = 0;
 
     const initParticles = () => {
       particles = [];
@@ -25,9 +27,15 @@ const HeroSection: React.FC = () => {
     const setCanvasDimensions = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
+      
+      canvasWidth = rect.width;
+      canvasHeight = rect.height;
+      
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
+      
       ctx.scale(dpr, dpr);
+      
       initParticles();
     };
 
@@ -46,8 +54,8 @@ const HeroSection: React.FC = () => {
       color: string;
 
       constructor() {
-        this.x = Math.random() * canvas!.clientWidth;
-        this.y = Math.random() * canvas!.clientHeight;
+        this.x = Math.random() * canvasWidth;
+        this.y = Math.random() * canvasHeight;
         this.size = Math.random() * 5 + 1;
         this.speedX = (Math.random() - 0.5) * 1;
         this.speedY = (Math.random() - 0.5) * 1;
@@ -58,11 +66,11 @@ const HeroSection: React.FC = () => {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        if (this.x > canvas!.clientWidth + this.size) this.x = -this.size;
-        else if (this.x < -this.size) this.x = canvas!.clientWidth + this.size;
+        if (this.x > canvasWidth) this.x = 0;
+        else if (this.x < 0) this.x = canvasWidth;
 
-        if (this.y > canvas!.clientHeight + this.size) this.y = -this.size;
-        else if (this.y < -this.size) this.y = canvas!.clientHeight + this.size;
+        if (this.y > canvasHeight) this.y = 0;
+        else if (this.y < 0) this.y = canvasHeight;
       }
 
       draw() {
@@ -92,12 +100,13 @@ const HeroSection: React.FC = () => {
       }
     }
 
-    initParticles();
+    setCanvasDimensions();
 
     let animationFrameId: number;
     const animate = () => {
       if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+      
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
       for (const particle of particles) {
         particle.update();
