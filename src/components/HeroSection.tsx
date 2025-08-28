@@ -12,16 +12,30 @@ const HeroSection: React.FC = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const setCanvasDimensions = () => {
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
+    let particles: Particle[] = [];
+
+    const initParticles = () => {
+      particles = [];
+      const particleCount = window.innerWidth < 768 ? 30 : 60;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
     };
 
-    setCanvasDimensions();
-    window.addEventListener("resize", setCanvasDimensions);
+    const setCanvasDimensions = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      initParticles();
+    };
 
-    const particleCount = 50;
-    const particles: Particle[] = [];
+    const resizeObserver = new ResizeObserver(() => {
+      setCanvasDimensions();
+    });
+
+    resizeObserver.observe(canvas);
 
     class Particle {
       x: number;
@@ -32,8 +46,8 @@ const HeroSection: React.FC = () => {
       color: string;
 
       constructor() {
-        this.x = Math.random() * canvas!.width;
-        this.y = Math.random() * canvas!.height;
+        this.x = Math.random() * canvas!.clientWidth;
+        this.y = Math.random() * canvas!.clientHeight;
         this.size = Math.random() * 5 + 1;
         this.speedX = (Math.random() - 0.5) * 1;
         this.speedY = (Math.random() - 0.5) * 1;
@@ -44,11 +58,11 @@ const HeroSection: React.FC = () => {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        if (this.x > canvas!.width) this.x = 0;
-        else if (this.x < 0) this.x = canvas!.width;
+        if (this.x > canvas!.clientWidth) this.x = 0;
+        else if (this.x < 0) this.x = canvas!.clientWidth;
 
-        if (this.y > canvas!.height) this.y = 0;
-        else if (this.y < 0) this.y = canvas!.height;
+        if (this.y > canvas!.clientHeight) this.y = 0;
+        else if (this.y < 0) this.y = canvas!.clientHeight;
       }
 
       draw() {
@@ -78,13 +92,12 @@ const HeroSection: React.FC = () => {
       }
     }
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
+    initParticles();
 
+    let animationFrameId: number;
     const animate = () => {
-      if (!canvas || !ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
 
       for (const particle of particles) {
         particle.update();
@@ -95,13 +108,14 @@ const HeroSection: React.FC = () => {
         particle.connect(particles);
       }
 
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
-      window.removeEventListener("resize", setCanvasDimensions);
+      resizeObserver.unobserve(canvas!);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
