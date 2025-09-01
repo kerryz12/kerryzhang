@@ -58,13 +58,14 @@ const ProjectsSection: React.FC = () => {
     <section id="projects" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center space-y-6 mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
             My Projects
           </h2>
           <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
             Here are some of my recent projects that showcase my skills and
             expertise.
           </p>
+          <div className="mt-8 w-20 h-1 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 rounded-full mx-auto"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 lg:gap-10">

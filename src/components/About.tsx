@@ -46,7 +46,7 @@ const AboutSection: React.FC = () => {
 
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                 About Me
               </h2>
             </div>
@@ -77,6 +77,8 @@ const AboutSection: React.FC = () => {
                 In my free time, I enjoy powerlifting, bouldering, creating
                 music, and coming up with fashionable new outfits.
               </p>
+
+              <div className="mt-8 w-20 h-1 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 rounded-full"></div>
             </div>
 
             <div className="pt-4">
