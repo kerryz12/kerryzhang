@@ -1,138 +1,110 @@
-import React, { useState } from "react";
-import {
-  Code,
-  Layout,
-  Database,
-  Terminal,
-  BarChart,
-  Globe,
-} from "lucide-react";
-import BackgroundLights from "./BackgroundLights";
+import React from "react";
+import { Code, Layout, Terminal } from "lucide-react";
 
 const SkillsSection: React.FC = () => {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
   const skillCategories = [
     {
       title: "Languages",
       icon: <Code size={24} />,
-      color: "blue",
-      skills: ["C/C++", "TypeScript", "Python", "Java", "HTML/CSS", "SQL"],
+      iconClass: "bg-blue-100 text-blue-400",
       description:
-        "Programming languages I'm most experienced in using to bring ideas to life.",
+        "I'm experienced with a variety of programming languages, each one suited to different applications.",
+      skills: ["C/C++", "Java", "TypeScript", "Python", "HTML/CSS", "SQL"],
     },
     {
-      title: "Libraries & Frameworks",
+      title: "Frameworks & Libraries",
       icon: <Layout size={24} />,
-      color: "purple",
-      skills: ["Node", "Express", "React", "Vue", "Next", "Tailwind CSS"],
+      iconClass: "bg-indigo-100 text-indigo-400",
       description:
-        "Tools that I utilize while developing various types of projects.",
+        "I utilize modern frameworks and libraries to create responsive interfaces and reliable backend services.",
+      skills: [
+        "React",
+        "Next.js",
+        "Node.js",
+        "Express.js",
+        "Vue.js",
+        "Tailwind CSS",
+      ],
     },
     {
-      title: "Tools & Others",
+      title: "Tools & Technologies",
       icon: <Terminal size={24} />,
-      color: "lightBlue",
-      skills: ["Git", "RESTful APIs", "Travis CI", "Agile", "Linux", "MATLAB"],
+      iconClass: "bg-purple-100 text-purple-400",
       description:
-        "Additional skills and technologies that round out my technical toolkit.",
+        "I work with tools that make development smoother, from version control to deployment pipelines.",
+      skills: [
+        "Git",
+        "Docker",
+        "REST APIs",
+        "CI/CD (Jenkins)",
+        "Agile/Scrum",
+        "Linux",
+      ],
     },
   ];
 
   return (
-    <section id="skills" className="py-20 bg-white relative">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-4 text-center">My Skills</h2>
-        <p className="text-gray-600 mb-12 text-center max-w-3xl mx-auto">
-          I've worked with a wide range of technologies in the software
-          development world.
-        </p>
+    <section id="skills" className="py-20 md:py-28 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="lg:col-span-4 lg:sticky lg:top-8">
+            <div className="lg:pr-8">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900 leading-tight">
+                My Skills
+              </h2>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {skillCategories.map((category, idx) => {
-            const isHovered = hoveredCard === idx;
-            const colorClasses = {
-              blue: {
-                border: "border-blue-200",
-                bg: "bg-blue-50",
-                text: "text-blue-500",
-                iconBg: "bg-blue-100",
-                iconText: "text-blue-500",
-                highlight: "border-blue-400",
-                dot: "bg-blue-700",
-              },
-              purple: {
-                border: "border-purple-200",
-                bg: "bg-purple-50",
-                text: "text-purple-700",
-                iconBg: "bg-purple-100",
-                iconText: "text-purple-700",
-                highlight: "border-purple-400",
-                dot: "bg-purple-700",
-              },
-              lightBlue: {
-                border: "border-sky-200",
-                bg: "bg-sky-50",
-                text: "text-sky-700",
-                iconBg: "bg-sky-100",
-                iconText: "text-sky-700",
-                highlight: "border-sky-400",
-                dot: "bg-sky-700",
-              },
-            };
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Here's a summary of the primary tools and technologies I work
+                with to bring ideas to life, from concept to deployment.
+              </p>
 
-            const colors =
-              colorClasses[category.color as keyof typeof colorClasses];
+              <div className="mt-8 w-20 h-1 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 rounded-full"></div>
+            </div>
+          </div>
 
-            return (
-              <div
-                key={idx}
-                className={`rounded-xl p-6 border ${
-                  colors.border
-                } shadow-sm transition-all duration-300 ease-out 
-                  ${
-                    isHovered
-                      ? `shadow-lg ${colors.highlight} -translate-y-1`
-                      : ""
-                  }`}
-                onMouseEnter={() => setHoveredCard(idx)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="flex items-center mb-4">
-                  <div
-                    className={`p-2 rounded-lg ${colors.iconBg} ${colors.iconText} mr-3`}
-                  >
-                    {category.icon}
-                  </div>
-                  <h3 className={`text-xl font-bold ${colors.text}`}>
-                    {category.title}
-                  </h3>
-                </div>
-
-                <p className="text-gray-600 mb-4 text-sm">
-                  {category.description}
-                </p>
-
-                <div className="grid grid-cols-2 gap-2">
-                  {category.skills.map((skill, i) => (
+          <div className="lg:col-span-8">
+            <div className="space-y-6">
+              {skillCategories.map((category, idx) => (
+                <div
+                  key={idx}
+                  className="bg-slate-50 rounded-2xl border border-gray-200 p-6 md:p-8 
+                             transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:border-gray-300
+                             group"
+                >
+                  <div className="flex items-start gap-4 mb-6">
                     <div
-                      key={i}
-                      className={`
-      px-3 py-2 rounded-lg text-sm flex items-center
-      transition-colors duration-300
-      ${isHovered ? colors.bg : "bg-gray-50"}
-    `}
+                      className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${category.iconClass}
+                                 group-hover:scale-110 transition-transform duration-300 ease-in-out`}
                     >
-                      <div
-                        className={`w-1.5 h-1.5 rounded-full mr-2 ${colors.dot}`}
-                      ></div>
-                      {skill}
+                      {category.icon}
                     </div>
-                  ))}
+
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-gray-900 transition-colors duration-300">
+                        {category.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">
+                        {category.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill, i) => (
+                      <span
+                        key={i}
+                        className="bg-white text-gray-700 px-3 py-2 rounded-lg text-sm font-medium
+                                   border border-gray-200 group-hover:border-gray-300 group-hover:shadow-sm
+                                   transition-all duration-200 ease-in-out cursor-default"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
