@@ -44,13 +44,13 @@ const Navbar: React.FC = () => {
       }`}
     >
       <div
-        className={`max-w-6xl mx-auto transition-all duration-300 ${
+        className={`max-w-7xl mx-auto transition-all duration-300 ${
           scrolled
             ? "bg-white/90 backdrop-blur-sm rounded-3xl shadow-lg"
             : "bg-transparent rounded-none shadow-none"
         }`}
       >
-        <div className="flex justify-between items-center px-6 py-3">
+        <div className="flex justify-between items-center px-6 lg:px-8 py-3">
           <a href="#home" className="text-2xl font-bold text-gray-800">
             Kerry Zhang
           </a>

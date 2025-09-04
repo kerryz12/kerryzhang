@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const AboutSection: React.FC = () => {
   const [typedText, setTypedText] = useState<string>("");
 
-  const command = "echo Hello World";
+  const command = "echo Hello World!";
   const typingSpeed = 100;
 
   useEffect(() => {
