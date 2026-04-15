@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"JetBrains Mono"', 'monospace'],
+      },
       animation: {
         float: "float ease-in-out infinite",
       },
