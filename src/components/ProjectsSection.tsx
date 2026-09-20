@@ -1,6 +1,6 @@
 import React from "react";
 import { ProjectCard } from ".";
-import SectionHeading from "./SectionHeading";
+import { SectionHeading } from ".";
 import guesstheword from "../assets/guesstheword.png";
 import songoftheday from "../assets/songoftheday.png";
 import healthmonitor from "../assets/healthmonitor.png";
