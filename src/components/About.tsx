@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import SectionHeading from "./SectionHeading";
 
 const blocks = [
   { cmd: "echo Hello World!", out: "Hello World!" },
