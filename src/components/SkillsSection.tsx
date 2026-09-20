@@ -1,110 +1,72 @@
 import React from "react";
-import { Code, Layout, Terminal } from "lucide-react";
+import SectionHeading from "./SectionHeading";
+
+const skillCategories = [
+  {
+    title: "Languages",
+    description:
+      "I'm experienced with a variety of programming languages, each one suited to different applications.",
+    skills: ["C/C++", "Java", "TypeScript", "Python", "HTML/CSS", "SQL"],
+  },
+  {
+    title: "Frameworks & Libraries",
+    description:
+      "I utilize modern frameworks and libraries to create responsive interfaces and reliable backend services.",
+    skills: [
+      "React",
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "Vue.js",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    title: "Tools & Technologies",
+    description:
+      "I work with tools that make development smoother, from version control to deployment pipelines.",
+    skills: [
+      "Git",
+      "Docker",
+      "REST APIs",
+      "CI/CD (Travis)",
+      "Agile/Scrum",
+      "Linux",
+    ],
+  },
+];
 
 const SkillsSection: React.FC = () => {
-  const skillCategories = [
-    {
-      title: "Languages",
-      icon: <Code size={24} />,
-      iconClass: "bg-blue-100 text-blue-400",
-      description:
-        "I'm experienced with a variety of programming languages, each one suited to different applications.",
-      skills: ["C/C++", "Java", "TypeScript", "Python", "HTML/CSS", "SQL"],
-    },
-    {
-      title: "Frameworks & Libraries",
-      icon: <Layout size={24} />,
-      iconClass: "bg-indigo-100 text-indigo-400",
-      description:
-        "I utilize modern frameworks and libraries to create responsive interfaces and reliable backend services.",
-      skills: [
-        "React",
-        "Next.js",
-        "Node.js",
-        "Express.js",
-        "Vue.js",
-        "Tailwind CSS",
-      ],
-    },
-    {
-      title: "Tools & Technologies",
-      icon: <Terminal size={24} />,
-      iconClass: "bg-purple-100 text-purple-400",
-      description:
-        "I work with tools that make development smoother, from version control to deployment pipelines.",
-      skills: [
-        "Git",
-        "Docker",
-        "REST APIs",
-        "CI/CD (Travis)",
-        "Agile/Scrum",
-        "Linux",
-      ],
-    },
-  ];
-
   return (
-    <section id="skills" className="py-20 md:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <div className="lg:col-span-4 lg:sticky lg:top-8">
-            <div className="lg:pr-8">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900 leading-tight">
-                My Skills
-              </h2>
+    <section id="skills" className="bg-white py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+        <SectionHeading
+          title="My Skills"
+          description="Here's a summary of the primary tools and technologies I work with to bring ideas to life, from concept to deployment."
+        />
 
-              <p className="text-lg text-gray-600 leading-relaxed">
-                Here's a summary of the primary tools and technologies I work
-                with to bring ideas to life, from concept to deployment.
-              </p>
+        <div>
+          {skillCategories.map((category) => (
+            <div
+              key={category.title}
+              className="grid gap-5 border-t border-gray-200 py-8 md:grid-cols-12 md:gap-10 md:py-10"
+            >
+              <div className="md:col-span-4">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  {category.title}
+                </h3>
+                <p className="mt-2 max-w-xs text-sm leading-relaxed text-gray-500">
+                  {category.description}
+                </p>
+              </div>
 
-              <div className="mt-8 w-20 h-1 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 rounded-full"></div>
+              <ul className="flex flex-wrap content-start gap-x-8 gap-y-3 text-lg text-gray-800 md:col-span-8">
+                {category.skills.map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          <div className="lg:col-span-8">
-            <div className="space-y-6">
-              {skillCategories.map((category, idx) => (
-                <div
-                  key={idx}
-                  className="bg-slate-50 rounded-2xl border border-gray-200 p-6 md:p-8 
-                             transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:border-gray-300
-                             group"
-                >
-                  <div className="flex items-start gap-4 mb-6">
-                    <div
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${category.iconClass}
-                                 group-hover:scale-110 transition-transform duration-300 ease-in-out`}
-                    >
-                      {category.icon}
-                    </div>
-
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-gray-900 transition-colors duration-300">
-                        {category.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {category.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill, i) => (
-                      <span
-                        key={i}
-                        className="bg-white text-gray-700 px-3 py-2 rounded-lg text-sm font-medium
-                                   border border-gray-200 group-hover:border-gray-300 group-hover:shadow-sm
-                                   transition-all duration-200 ease-in-out cursor-default"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

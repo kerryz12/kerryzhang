@@ -1,3 +1,6 @@
+import React from "react";
+import { ArrowUpRight } from "lucide-react";
+
 interface ProjectProps {
   title: string;
   description: string;
@@ -5,7 +8,17 @@ interface ProjectProps {
   alt: string;
   tech: string[];
   link: string;
+  featured?: boolean;
 }
+
+const displayUrl = (link: string) => {
+  try {
+    const { hostname, pathname } = new URL(link);
+    return hostname + (pathname === "/" ? "" : pathname.replace(/\/$/, ""));
+  } catch {
+    return link;
+  }
+};
 
 const ProjectCard: React.FC<ProjectProps> = ({
   title,
@@ -14,60 +27,73 @@ const ProjectCard: React.FC<ProjectProps> = ({
   alt,
   tech,
   link,
+  featured = false,
 }) => {
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 group">
-      <div className="h-56 overflow-hidden">
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block h-full w-full"
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition-colors duration-200 hover:border-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 ${featured ? "md:col-span-2 md:flex-row" : ""
+        }`}
+    >
+      <div
+        className={`flex flex-col ${featured ? "md:w-[58%] md:border-r md:border-gray-100" : ""
+          }`}
+      >
+        <div className="flex h-9 shrink-0 items-center gap-1.5 border-b border-gray-100 bg-gray-50 px-4">
+          <span className="h-2 w-2 rounded-full bg-gray-300" />
+          <span className="h-2 w-2 rounded-full bg-gray-300" />
+          <span className="h-2 w-2 rounded-full bg-gray-300" />
+          <span className="ml-3 truncate text-xs text-gray-400">
+            {displayUrl(link)}
+          </span>
+        </div>
+
+        <div
+          className={`relative aspect-[16/10] overflow-hidden bg-gray-100 ${featured ? "md:aspect-auto md:min-h-[320px] md:flex-1" : ""
+            }`}
         >
           <img
             src={image}
             alt={alt}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
           />
-        </a>
+        </div>
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2">{title}</h3>
-        <p className="text-gray-600 mb-4">{description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {tech.map((item, index) => (
+
+      <div
+        className={`flex flex-1 flex-col gap-4 p-6 ${featured ? "md:justify-center md:p-10" : "md:p-7"
+          }`}
+      >
+        <div className="flex items-start justify-between gap-4">
+          <h3
+            className={`font-bold text-gray-900 ${featured ? "text-2xl md:text-3xl" : "text-xl"
+              }`}
+          >
+            {title}
+          </h3>
+          <ArrowUpRight
+            size={22}
+            aria-hidden="true"
+            className="mt-1 shrink-0 text-gray-300 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue-500"
+          />
+        </div>
+
+        <p className="text-sm leading-relaxed text-gray-600">{description}</p>
+
+        <div className={`flex flex-wrap gap-2 ${featured ? "pt-2" : "mt-auto pt-2"}`}>
+          {tech.map((item) => (
             <span
-              key={index}
-              className="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded"
+              key={item}
+              className="rounded-md border border-gray-200 px-2 py-0.5 text-xs text-gray-600"
             >
               {item}
             </span>
           ))}
         </div>
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 font-medium hover:text-blue-700 transition-colors flex items-center"
-        >
-          View Project
-          <svg
-            className="ml-1 w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M14 5l7 7m0 0l-7 7m7-7H3"
-            ></path>
-          </svg>
-        </a>
       </div>
-    </div>
+    </a>
   );
 };
 

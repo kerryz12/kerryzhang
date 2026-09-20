@@ -1,4 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+const navLinks = [
+  { label: "Home", id: "home" },
+  { label: "About", id: "about" },
+  { label: "Projects", id: "projects" },
+  { label: "Skills", id: "skills" },
+];
+
+const RESUME_URL = "/Kerry_Zhang_Resume.pdf";
+
+const focusRing =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -6,147 +18,164 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-
-      const sections = ["home", "about", "projects", "skills"];
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollPosition = window.scrollY;
-
-      if (scrollPosition + windowHeight >= documentHeight - 50) {
-        setActiveSection("skills");
-        return;
-      }
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinks = ["Home", "About", "Projects", "Skills"];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+
+    navLinks.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isMenuOpen]);
+
+  const showLogo = activeSection !== "home";
+  const solid = scrolled || isMenuOpen;
 
   return (
     <nav
-      className={`fixed w-full top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "p-2" : "p-0"
-      }`}
-    >
-      <div
-        className={`max-w-7xl mx-auto transition-all duration-300 ${
-          scrolled
-            ? "bg-white/90 backdrop-blur-sm rounded-3xl shadow-lg"
-            : "bg-transparent rounded-none shadow-none"
+      aria-label="Main"
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${solid
+        ? "border-gray-200 bg-white/80 backdrop-blur"
+        : "border-transparent bg-transparent"
         }`}
-      >
-        <div className="flex justify-between items-center px-6 lg:px-8 py-3">
-          <a href="#home" className="text-2xl font-bold text-gray-800">
+    >
+      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+        <div className="flex h-14 items-center justify-between">
+          <a
+            href="#home"
+            tabIndex={showLogo ? 0 : -1}
+            aria-hidden={!showLogo}
+            className={`text-base font-bold text-gray-900 transition-opacity duration-300 ${showLogo ? "opacity-100" : "pointer-events-none opacity-0"
+              } ${focusRing}`}
+          >
             Kerry Zhang
           </a>
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((item) => (
+
+          <ul className="hidden items-center gap-8 md:flex">
+            {navLinks.map(({ label, id }) => {
+              const active = activeSection === id;
+              return (
+                <li key={id}>
+                  <a
+                    href={`#${id}`}
+                    aria-current={active ? "location" : undefined}
+                    className={`border-b pb-0.5 text-sm transition-colors ${active
+                      ? "border-gray-900 text-gray-900"
+                      : "border-transparent text-gray-500 hover:text-blue-500"
+                      } ${focusRing}`}
+                  >
+                    {label}
+                  </a>
+                </li>
+              );
+            })}
+            <li>
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className={`font-medium hover:text-blue-500 transition-colors ${
-                  activeSection === item.toLowerCase()
-                    ? "text-blue-500"
-                    : "text-gray-800"
-                }`}
+                href={RESUME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-700 transition-colors hover:border-blue-500 hover:text-blue-500 ${focusRing}`}
               >
-                {item}
+                Resume
               </a>
-            ))}
-            <a
-              href="/Kerry_Zhang_Resume.pdf"
-              className="font-medium hover:text-blue-500 transition-colors text-gray-800"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Resume
-            </a>
-          </div>
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-800 focus:outline-none"
+            </li>
+          </ul>
+
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            className={`-mr-2 p-2 text-gray-900 md:hidden ${focusRing}`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
             >
               {isMenuOpen ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
+                <>
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </>
               ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="3" y1="12" x2="21" y2="12"></line>
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
+                <>
+                  <line x1="3" y1="12" x2="21" y2="12" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <line x1="3" y1="18" x2="21" y2="18" />
+                </>
               )}
-            </button>
-          </div>
+            </svg>
+          </button>
         </div>
+
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMenuOpen ? "max-h-96" : "max-h-0"
-          }`}
+          id="mobile-menu"
+          className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${isMenuOpen ? "visible max-h-96" : "invisible max-h-0"
+            }`}
         >
-          <div className="flex flex-col items-center space-y-4 py-4 border-t border-gray-200/50">
-            {navLinks.map((item) => (
+          <ul className="flex flex-col border-t border-gray-200 py-2">
+            {navLinks.map(({ label, id }) => {
+              const active = activeSection === id;
+              return (
+                <li key={id}>
+                  <a
+                    href={`#${id}`}
+                    onClick={() => setIsMenuOpen(false)}
+                    aria-current={active ? "location" : undefined}
+                    className={`block py-3 text-base transition-colors ${active
+                      ? "font-semibold text-gray-900"
+                      : "text-gray-500 hover:text-blue-500"
+                      } ${focusRing}`}
+                  >
+                    {label}
+                  </a>
+                </li>
+              );
+            })}
+            <li>
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                href={RESUME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}
-                className={`font-medium hover:text-blue-500 transition-colors ${
-                  activeSection === item.toLowerCase()
-                    ? "text-blue-500"
-                    : "text-gray-800"
-                }`}
+                className={`block py-3 text-base text-gray-500 transition-colors hover:text-blue-500 ${focusRing}`}
               >
-                {item}
+                Resume
               </a>
-            ))}
-            <a
-              href="/Kerry_Zhang_Resume.pdf"
-              onClick={() => setIsMenuOpen(false)}
-              className="font-medium hover:text-blue-500 transition-colors text-gray-800"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Resume
-            </a>
-          </div>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>

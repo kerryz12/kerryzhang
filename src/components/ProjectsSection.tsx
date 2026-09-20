@@ -1,4 +1,6 @@
+import React from "react";
 import { ProjectCard } from ".";
+import SectionHeading from "./SectionHeading";
 import guesstheword from "../assets/guesstheword.png";
 import songoftheday from "../assets/songoftheday.png";
 import healthmonitor from "../assets/healthmonitor.png";
@@ -55,29 +57,24 @@ const ProjectsSection: React.FC = () => {
   ];
 
   return (
-    <section id="projects" className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center space-y-6 mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-            My Projects
-          </h2>
-          <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            Here are some of my recent projects that showcase my skills and
-            expertise.
-          </p>
-          <div className="mt-8 w-20 h-1 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 rounded-full mx-auto"></div>
-        </div>
+    <section id="projects" className="bg-white py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+        <SectionHeading
+          title="My Projects"
+          description="Here are some of my recent projects that showcase my skills and expertise."
+        />
 
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
           {projects.map((project, index) => (
             <ProjectCard
-              key={index}
+              key={project.title}
               title={project.title}
               description={project.description}
               image={project.image}
               alt={project.alt}
               tech={project.tech}
               link={project.link}
+              featured={index === 0}
             />
           ))}
         </div>
